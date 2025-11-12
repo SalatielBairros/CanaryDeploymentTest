@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: balance-old
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: balance-old
+      version: stable
+  template:
+    metadata:
+      labels:
+        app: balance-old
+        version: stable
+    spec:
+      containers:
+      - name: balance-old
+        image: ghcr.io/salatielbairros/oldapp:latest
+        imagePullPolicy: Always
+        env:
+        - name: ConnectionStrings__Redis
+          value: "redis-svc:6379,password=123456"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+          name: http
+        
+        resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"

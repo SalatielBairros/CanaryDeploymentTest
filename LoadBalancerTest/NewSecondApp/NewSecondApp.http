@@ -1,0 +1,6 @@
+@NewApp_HostAddress = http://localhost:5295
+
+POST {{NewApp_HostAddress}}/new/v1/Second
+Accept: application/json
+
+###

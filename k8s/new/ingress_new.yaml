@@ -1,0 +1,26 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: balance-new
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 15m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+    nginx.ingress.kubernetes.io/use-gzip: "true"
+    nginx.ingress.kubernetes.io/gzip-types: "*"
+  labels:
+    application: balance-new
+spec:
+  rules:
+  - host: lscloud.dev.totvs.app
+    http:
+      paths:
+      - path: /api/balance/new
+        pathType: Prefix
+        backend:
+          service:
+            name: balance-new-service
+            port: 
+              name: http     

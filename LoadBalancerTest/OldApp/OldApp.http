@@ -1,0 +1,6 @@
+@OldApp_HostAddress = http://localhost:5295
+
+POST {{OldApp_HostAddress}}/old/v1/Main
+Accept: application/json
+
+###
