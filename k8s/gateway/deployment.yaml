@@ -14,9 +14,17 @@ spec:
     spec:
       containers:
       - name: balance-gateway
-        image: yourrepo/balance-gateway:latest
+        image: ghcr.io/salatielbairros/balancegateway:latest
+        imagePullPolicy: Always
+        env:
+        - name: ASPNETCORE_HTTP_PORTS
+          value: "8080"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"        
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+          protocol: TCP
+          name: http        
         resources:
             requests:
               cpu: "100m"

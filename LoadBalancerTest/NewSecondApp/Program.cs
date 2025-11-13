@@ -29,24 +29,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 var app = builder.Build();
-app.Use(async (context, next) =>
-{
-    var path = context.Request.Path.Value ?? "";
-    var oldBase = "/api/balance/old";
-    var newBase = "/api/balance/new-second";
-
-    Console.WriteLine($"PATH: {path}");
-
-    if (path.StartsWith(oldBase))
-    {
-        context.Request.Path = path.Replace(oldBase, newBase);
-    }
-
-    await next();
-});
-
-app.UseRouting();
-
 app.UsePathBase(new PathString("/api/balance/new-second"));
 
 

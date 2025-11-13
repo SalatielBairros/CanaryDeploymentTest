@@ -15,24 +15,6 @@ string redisConnectionString = configuration.GetConnectionString("Redis");
 builder.Services.AddSingleton<IInsertRecord>(new InsertRecord(redisConnectionString));
 
 var app = builder.Build();
-app.Use(async (context, next) =>
-{
-    var path = context.Request.Path.Value ?? "";
-    var oldBase = "/api/balance/old";
-    var newBase = "/api/balance/new";
-
-    Console.WriteLine($"PATH: {path}");
-
-    if (path.StartsWith(oldBase))
-    {
-        context.Request.Path = path.Replace(oldBase, newBase);
-    }
-
-    await next();
-});
-
-app.UseRouting();
-
 app.UsePathBase(new PathString("/api/balance/new"));
 
 

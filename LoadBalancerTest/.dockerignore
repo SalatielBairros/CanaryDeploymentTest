@@ -6,6 +6,7 @@
 **/.project
 **/.settings
 **/.toolstarget
+**/launchSettings.json
 **/.vs
 **/.vscode
 **/*.*proj.user

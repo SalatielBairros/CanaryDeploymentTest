@@ -26,8 +26,7 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
-          name: http
-        
+          name: http        
         resources:
             requests:
               cpu: "100m"
