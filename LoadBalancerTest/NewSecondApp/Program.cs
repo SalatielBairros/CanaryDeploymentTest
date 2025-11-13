@@ -33,7 +33,10 @@ app.Use(async (context, next) =>
 {
     var path = context.Request.Path.Value ?? "";
     var oldBase = "/api/balance/old";
-    var newBase = "/api/balance/new";
+    var newBase = "/api/balance/new-second";
+
+    Console.WriteLine($"PATH: {path}");
+
     if (path.StartsWith(oldBase))
     {
         context.Request.Path = path.Replace(oldBase, newBase);
@@ -44,7 +47,7 @@ app.Use(async (context, next) =>
 
 app.UseRouting();
 
-app.UsePathBase(new PathString("/api/balance/new"));
+app.UsePathBase(new PathString("/api/balance/new-second"));
 
 
 // Configure the HTTP request pipeline.

@@ -9,17 +9,17 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["NewApp/NewApp.csproj", "NewApp/"]
+COPY ["NewSecondApp/NewSecondApp.csproj", "NewSecondApp/"]
 COPY ["Repository/Repository.csproj", "Repository/"]
-RUN dotnet restore "./NewApp/NewApp.csproj"
+RUN dotnet restore "./NewSecondApp/NewSecondApp.csproj"
 COPY . .
-WORKDIR "/src/NewApp"
-RUN dotnet build "./NewApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/NewSecondApp"
+RUN dotnet build "./NewSecondApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./NewApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish
+RUN dotnet publish "./NewSecondApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
@@ -27,4 +27,4 @@ WORKDIR /app
 ENV ASPNETCORE_URLS="http://+:8080"
 EXPOSE 8080
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "NewApp.dll"]
+ENTRYPOINT ["dotnet", "NewSecondApp.dll"]

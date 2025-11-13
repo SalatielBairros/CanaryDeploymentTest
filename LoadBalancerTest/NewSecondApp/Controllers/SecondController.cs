@@ -4,7 +4,7 @@ using Repository;
 namespace NewSecondApp.Controllers;
 
 [ApiController]
-[Route("api/balance/new/v1/[controller]")]
+[Route("api/balance/new-second/v1/[controller]")]
 public class SecondController : ControllerBase
 {
     private readonly IInsertRecord _repository;

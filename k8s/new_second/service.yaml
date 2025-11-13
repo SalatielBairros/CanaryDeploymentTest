@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: balance-new-second-service
+spec:
+  type: ClusterIP
+  selector:
+    app: balance-new-second
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
