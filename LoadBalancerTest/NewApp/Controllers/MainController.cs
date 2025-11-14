@@ -19,4 +19,22 @@ public class MainController : ControllerBase
     {
         return Ok(await _repository.InsertData("NEW"));
     }
+
+    [HttpGet("{value}")]
+    public async Task<ActionResult<InsertResponse>> Get(string value)
+    {
+        return Ok(await _repository.InsertData($"NEW_{value}"));
+    }
+
+    [HttpGet("novalue")]
+    public async Task<ActionResult<InsertResponse>> NoValue()
+    {
+        return Ok(await _repository.InsertData($"NEW_NOVALUE"));
+    }
+
+    [HttpGet("{value}/after")]
+    public async Task<ActionResult<InsertResponse>> GetAfter(string value)
+    {
+        return Ok(await _repository.InsertData($"NEW_{value}_AFTER"));
+    }
 }

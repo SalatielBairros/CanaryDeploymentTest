@@ -16,12 +16,6 @@ builder.Services.AddSingleton<IInsertRecord>(new InsertRecord(redisConnectionStr
 
 var app = builder.Build();
 
-app.Use(async (context, next) =>
-{
-    Console.WriteLine($"PATH RECEBIDO: {context.Request.Path}");
-    await next();
-});
-
 app.UsePathBase(new PathString("/api/balance/old"));
 
 // Configure the HTTP request pipeline.
