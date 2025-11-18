@@ -37,4 +37,16 @@ public class MainController : ControllerBase
     {
         return Ok(await _repository.InsertData($"OLD_{value}_AFTER"));
     }
+
+    [HttpGet("alternative-route/{value}/first")]
+    public async Task<ActionResult<InsertResponse>> FirstAlternativeRoute(string value)
+    {
+        return Ok(await _repository.InsertData($"OLD_{value}_FIRST_ALTERNATIVE_ROUTE"));
+    }
+
+    [HttpGet("alternative-route/{value}/second")]
+    public async Task<ActionResult<InsertResponse>> SecondAlternativeRoute(string value)
+    {
+        return Ok(await _repository.InsertData($"OLD_{value}_SECOND_ALTERNATIVE_ROUTE"));
+    }
 }
